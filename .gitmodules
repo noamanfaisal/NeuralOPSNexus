@@ -1,0 +1,3 @@
+[submodule "modules/chat-server"]
+	path = modules/chat-server
+	url = git@personal_github:noamanfaisal/nexus-chat.git
