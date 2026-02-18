@@ -1,6 +1,12 @@
+[submodule "modules/terminal"]
+	path = modules/terminal
+	url = git@personal_github:noamanfaisal/nexus-terminal-app.git
 [submodule "modules/chat-server"]
 	path = modules/chat-server
 	url = git@personal_github:noamanfaisal/nexus-chat.git
 [submodule "modules/chat-ui"]
 	path = modules/chat-ui
 	url = git@personal_github:noamanfaisal/nexus-ui.git
+[submodule "modules/nucleus"]
+	path = modules/nucleus
+	url = git@personal_github:noamanfaisal/nexus-brain.git
