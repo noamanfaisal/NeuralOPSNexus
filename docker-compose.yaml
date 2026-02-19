@@ -1,0 +1,59 @@
+services:
+  nexus-db:
+    image: postgres:16-alpine
+    container_name: nexus-db
+    restart: always
+    environment:
+      - POSTGRES_USER=synapse
+      - POSTGRES_PASSWORD=neuralops
+      - POSTGRES_DB=synapse
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+  
+  # # Your ACTUAL Custom App
+  # nexus-ui:
+  #   build:
+  #     context: ./modules/nexus-ui
+  #     dockerfile: Dockerfile
+  #   container_name: nexus-ui
+  #   restart: always
+  #   ports:
+  #     - "3000:80"  # Your app on 3000, Cinny stays on 8080 for now
+  #   depends_on:
+  #     - nexus-chat
+  #   networks:
+  #     - nexus-network
+  
+  # Your temporary reference UI
+  nexus-cinny:
+    image: ghcr.io/cinnyapp/cinny:latest
+    container_name: nexus-cinny
+    ports:
+      - "8080:80"
+    volumes:
+      - ./data/cinny/config.json:/app/config.json:ro
+
+  nexus-chat:
+    image: chat-server:5.0
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    container_name: nexus-chat
+    restart: always
+    ports:
+      - "8008:8008"
+    volumes:
+      # Mount your local code for live editing
+      - ./modules/chat-server:/app
+      # Mount your data folder (config, keys, db)
+      - ./data/synapse:/data
+      # Use a named volume for Python libraries to keep them persistent
+      - synapse_deps:/usr/local/lib/python3.12/site-packages
+    environment:
+      - PYTHONPATH=/app
+    # This command checks for code changes (editable install) then starts the server
+    # entrypoint: /bin/bash -c "pip install -e . && python3 -m synapse.app.homeserver -c /data/homeserver.yaml"
+    entrypoint: /bin/bash -c "pip install psycopg2-binary && pip install -e . && python3 -m synapse.app.homeserver -c /data/homeserver.yaml"
+volumes:
+  synapse_deps:
