@@ -1,3 +1,0 @@
-[submodule "modules/nexus-chat"]
-	path = modules/nexus-chat
-	url = git@personal_github:noamanfaisal/nexus-synapse-chat.git

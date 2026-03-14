@@ -2,21 +2,25 @@
 fastapi[standard]
 pydantic-settings
 
-# Database & ORM
-sqlmodel
-sqladmin[bootstrap]
+# Real-time Transport 
+centrifugal-python
+PyJWT
+cryptography
+
+# Database & ORM (Structured Memory Only)
+sqlmodel                # For Users, Projects, and Chat History
 asyncpg
 psycopg2-binary
 alembic
-chromadb                # MUST ADD: The client to talk to your vector DB
 
-# AI & LLM Orchestration
-litellm
-instructor
-httpx
+# Communication
+httpx                   # To call Nexus-AI
 
-# Elite Dev Tools (Python side)
-rich                    # Beautiful logging
-ipython                 # Advanced interactive shell
-pytest                  # For testing your "Brain" logic
-pytest-asyncio          # For testing async FastAPI endpoints
+# Identity & Security
+passlib[bcrypt]
+
+# Elite Dev Tools
+rich
+ipython
+pytest
+pytest-asyncio

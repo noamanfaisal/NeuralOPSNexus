@@ -205,3 +205,22 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# --- Nexus Transport (Centrifugo) Vendor Rules ---
+modules/nexus-transport/centrifugo
+modules/nexus-transport/config.*
+modules/nexus-transport/BUILDS/
+modules/nexus-transport/PACKAGES/
+modules/nexus-transport/vendor/
+modules/nexus-transport/tmp/
+modules/nexus-transport/internal/ultra/
+modules/nexus-transport/FlameGraph/
+modules/nexus-transport/torch.svg
+modules/nexus-transport/protoc-3*
+
+# Database & Cluster Test Data (Local Dev Junk)
+modules/nexus-transport/misc/clickhouse_cluster/clickhouse*
+modules/nexus-transport/misc/redis_*/
+modules/nexus-transport/misc/nats_cluster/nats_logs/
+chroma_data/
+postgres_data/
